@@ -1,6 +1,6 @@
 package com.guicedee.microprofile.config;
 
-import com.guicedee.guicedinjection.interfaces.IGuicePreStartup;
+import com.guicedee.client.services.lifecycle.IGuicePreStartup;
 import com.guicedee.vertx.spi.VertXPreStartup;
 import io.smallrye.config.SmallRyeConfig;
 import io.smallrye.config.SmallRyeConfigBuilder;

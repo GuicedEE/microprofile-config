@@ -1,4 +1,6 @@
-import com.guicedee.guicedinjection.interfaces.*;
+import com.guicedee.client.services.lifecycle.IGuiceConfigurator;
+import com.guicedee.client.services.lifecycle.IGuiceModule;
+import com.guicedee.client.services.lifecycle.IGuicePreStartup;
 import com.guicedee.microprofile.config.*;
 import com.guicedee.microprofile.config.implementations.*;
 
@@ -9,7 +11,7 @@ module com.guicedee.microprofile.config {
 	requires static lombok;
 	requires transitive com.guicedee.vertx;
 
-    provides com.guicedee.guicedinjection.interfaces.IGuicePreStartup with MicroProfileConfigContext;
+    provides IGuicePreStartup with MicroProfileConfigContext;
 	provides IGuiceModule with MicroProfileConfigBinder;
 	provides com.google.inject.gee.InjectionPointProvider with InjectionPointProvision;
 	provides IGuiceConfigurator with ScanConfig;
