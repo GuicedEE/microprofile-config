@@ -10,13 +10,26 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.List;
 
+/**
+ * Initializes and exposes the {@link SmallRyeConfig} instance used by the
+ * application during Guice pre-startup.
+ */
 @Log4j2
 @Getter
 public class MicroProfileConfigContext implements IGuicePreStartup<MicroProfileConfigContext>
 {
+    /**
+     * Shared configuration instance built at startup.
+     */
     @Getter
     private static SmallRyeConfig config;
 
+    /**
+     * Builds the {@link SmallRyeConfig} on a Vert.x worker thread so startup
+     * does not block the event loop.
+     *
+     * @return a list containing the asynchronous startup task
+     */
     @Override
     public List<Future<Boolean>> onStartup()
     {

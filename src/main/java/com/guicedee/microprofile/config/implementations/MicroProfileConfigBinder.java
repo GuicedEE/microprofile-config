@@ -22,9 +22,21 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Guice module that binds {@link ConfigProperty}-annotated fields to
+ * {@link SmallRyeConfig} values discovered via classpath scanning.
+ * <p>
+ * Supported types are {@link String}, {@link Boolean}, {@link Integer},
+ * {@link Double}, {@link Float}, {@link Long}, and {@link Optional} wrappers
+ * for those types.
+ */
 @Log4j2
 public class MicroProfileConfigBinder extends AbstractModule implements IGuiceModule<MicroProfileConfigBinder>
 {
+    /**
+     * Scans for {@link ConfigProperty} fields and registers type-specific
+     * providers into the Guice binder.
+     */
     @Override
     protected void configure()
     {
@@ -212,6 +224,9 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
     @EqualsAndHashCode(of = {"clazz",
             "name"})
     @AllArgsConstructor
+    /**
+     * Key for tracking whether a type/name pair has already been bound.
+     */
     static final class ClassKeyPair
     {
         private final Class clazz;

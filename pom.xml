@@ -14,12 +14,13 @@
     <packaging>jar</packaging>
     <version>2.0.0-SNAPSHOT</version>
     <name>Guiced MicroProfile Config</name>
-    <description>The GuicedEE Implementation for MicroProfile Config</description>
+    <description>MicroProfile Config implementation for GuicedEE</description>
     <url>https://github.com/GuicedEE/Guiced-MicroProfileConfig</url>
 
     <properties>
         <ignore.moditect>true</ignore.moditect>
         <flatten.pom>false</flatten.pom>
+        <project.scm.nameUrl>/GuicedEE/Guiced-MicroProfileConfig</project.scm.nameUrl>
     </properties>
 
     <dependencies>
