@@ -15,12 +15,12 @@
     <version>2.0.0-SNAPSHOT</version>
     <name>Guiced MicroProfile Config</name>
     <description>MicroProfile Config implementation for GuicedEE</description>
-    <url>https://github.com/GuicedEE/Guiced-MicroProfileConfig</url>
+    <url>https://github.com/GuicedEE/microprofile-config</url>
 
     <properties>
         <ignore.moditect>true</ignore.moditect>
         <flatten.pom>false</flatten.pom>
-        <project.scm.nameUrl>/GuicedEE/Guiced-MicroProfileConfig</project.scm.nameUrl>
+        <project.scm.nameUrl>GuicedEE/microprofile-config</project.scm.nameUrl>
     </properties>
 
     <dependencies>

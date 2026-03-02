@@ -1,6 +1,6 @@
 # GuicedEE MicroProfile Config
 
-[![Build](https://github.com/GuicedEE/Guiced-MicroProfileConfig/actions/workflows/build.yml/badge.svg)](https://github.com/GuicedEE/Guiced-MicroProfileConfig/actions/workflows/build.yml)
+[![Build](https://github.com/GuicedEE/microprofile-config/actions/workflows/build.yml/badge.svg)](https://github.com/GuicedEE/Guiced-MicroProfileConfig/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.guicedee.microprofile/config)](https://central.sonatype.com/artifact/com.guicedee.microprofile/config)
 [![Maven Snapshot](https://img.shields.io/nexus/s/com.guicedee.microprofile/config?server=https%3A%2F%2Foss.sonatype.org&label=Maven%20Snapshot)](https://oss.sonatype.org/content/repositories/snapshots/com/guicedee/microprofile/config/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
