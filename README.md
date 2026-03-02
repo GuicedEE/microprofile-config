@@ -34,7 +34,7 @@ implementation("com.guicedee.microprofile:config:2.0.0-SNAPSHOT")
 
 ## ✨ Features
 
-- **CDI-style injection** — `@Inject @ConfigProperty(name = "key")` with automatic type conversion for `String`, `Boolean`, `Integer`, `Long`, `Double`, `Float`, and `Optional<T>` wrappers
+- **CDI-style injection** — `@ConfigProperty(name = "key")` with automatic type conversion for `String`, `Boolean`, `Integer`, `Long`, `Double`, `Float`, and `Optional<T>` wrappers
 - **Standards-compliant** — implements `org.eclipse.microprofile.config` APIs and annotations via SmallRye Config
 - **Deterministic source ordering** — environment variables (highest), system properties, and classpath `META-INF/microprofile-config.properties` (lowest)
 - **Custom converters** — register `Converter<T>` implementations via `ServiceLoader` for application-specific types
@@ -57,16 +57,13 @@ liveness.port=8081
 **Step 2** — Inject configuration values:
 
 ```java
-import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 public class MessagingService {
 
-    @Inject
     @ConfigProperty(name = "messaging.enabled", defaultValue = "true")
     boolean enabled;
-
-    @Inject
+    
     @ConfigProperty(name = "messaging.bootstrap.servers")
     String bootstrapServers;
 
@@ -245,8 +242,7 @@ com.guicedee.microprofile.config
  ├── io.smallrye.config.core          (SmallRye Config — MicroProfile Config implementation)
  ├── com.guicedee.vertx               (Vert.x lifecycle — worker thread initialization)
  ├── com.guicedee.client              (GuicedEE client — SPI contracts, IGuiceContext)
- ├── com.google.guice                 (Guice DI — injection bindings)
- └── jakarta.inject                   (CDI annotations — @Inject)
+ └── com.google.guice                 (Guice DI — injection bindings)
 ```
 
 ## 🏗️ Key Classes

@@ -14,6 +14,8 @@ module com.guicedee.microprofile.config {
     provides IGuicePreStartup with MicroProfileConfigContext;
 	provides IGuiceModule with MicroProfileConfigBinder;
 	provides com.google.inject.gee.InjectionPointProvider with InjectionPointProvision;
+	provides com.google.inject.gee.BindingAnnotationProvider with ConfigPropertyBindingAnnotationProvider;
+	provides com.google.inject.gee.NamedAnnotationProvider with ConfigPropertyNamedProvider;
 	provides IGuiceConfigurator with ScanConfig;
 	
 	opens com.guicedee.microprofile.config.implementations to com.google.guice;

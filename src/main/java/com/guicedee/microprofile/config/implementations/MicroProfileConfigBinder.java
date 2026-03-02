@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
+import com.google.inject.name.Names;
 import com.guicedee.client.IGuiceContext;
 import com.guicedee.client.services.lifecycle.IGuiceModule;
 import com.guicedee.microprofile.config.MicroProfileConfigContext;
@@ -62,7 +63,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                             if (String.class.isAssignableFrom(declaredField.getType()))
                             {
                                 bound.add(kp);
-                                bind(String.class).annotatedWith(annotation)
+                                bind(String.class).annotatedWith(Names.named(annotation.name()))
                                                   .toProvider(() -> {
                                                       ConfigValue configValue = MicroProfileConfigContext
                                                               .getConfig()
@@ -71,7 +72,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                   });
                                 bind(Key.get(new TypeLiteral<Optional<String>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
@@ -87,7 +88,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                             {
                                 bound.add(new ClassKeyPair(Boolean.class, annotation.name()));
                                 bound.add(new ClassKeyPair(boolean.class, annotation.name()));
-                                bind(Boolean.class).annotatedWith(annotation)
+                                bind(Boolean.class).annotatedWith(Names.named(annotation.name()))
                                                    .toProvider(() -> {
                                                        ConfigValue configValue = MicroProfileConfigContext
                                                                .getConfig()
@@ -96,7 +97,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                    });
                                 bind(Key.get(new TypeLiteral<Optional<Boolean>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
@@ -113,7 +114,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                 bound.add(new ClassKeyPair(Integer.class, annotation.name()));
                                 bound.add(new ClassKeyPair(int.class, annotation.name()));
 
-                                bind(Integer.class).annotatedWith(annotation)
+                                bind(Integer.class).annotatedWith(Names.named(annotation.name()))
                                                    .toProvider(() -> {
                                                        ConfigValue configValue = MicroProfileConfigContext
                                                                .getConfig()
@@ -122,7 +123,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                    });
                                 bind(Key.get(new TypeLiteral<Optional<Integer>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
@@ -138,7 +139,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                             {
                                 bound.add(new ClassKeyPair(Double.class, annotation.name()));
                                 bound.add(new ClassKeyPair(double.class, annotation.name()));
-                                bind(Double.class).annotatedWith(annotation)
+                                bind(Double.class).annotatedWith(Names.named(annotation.name()))
                                                   .toProvider(() -> {
                                                       ConfigValue configValue = MicroProfileConfigContext
                                                               .getConfig()
@@ -147,7 +148,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                   });
                                 bind(Key.get(new TypeLiteral<Optional<Double>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
@@ -163,7 +164,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                             {
                                 bound.add(new ClassKeyPair(Float.class, annotation.name()));
                                 bound.add(new ClassKeyPair(float.class, annotation.name()));
-                                bind(Float.class).annotatedWith(annotation)
+                                bind(Float.class).annotatedWith(Names.named(annotation.name()))
                                                  .toProvider(() -> {
                                                      ConfigValue configValue = MicroProfileConfigContext
                                                              .getConfig()
@@ -172,7 +173,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                  });
                                 bind(Key.get(new TypeLiteral<Optional<Float>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
@@ -188,7 +189,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                             {
                                 bound.add(new ClassKeyPair(Long.class, annotation.name()));
                                 bound.add(new ClassKeyPair(long.class, annotation.name()));
-                                bind(Long.class).annotatedWith(annotation)
+                                bind(Long.class).annotatedWith(Names.named(annotation.name()))
                                                 .toProvider(() -> {
                                                     ConfigValue configValue = MicroProfileConfigContext
                                                             .getConfig()
@@ -197,7 +198,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
                                                 });
                                 bind(Key.get(new TypeLiteral<Optional<Long>>()
                                 {
-                                }, annotation))
+                                }, Names.named(annotation.name())))
                                         .toProvider(() -> {
                                             ConfigValue configValue = MicroProfileConfigContext
                                                     .getConfig()
