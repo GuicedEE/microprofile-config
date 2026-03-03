@@ -35,3 +35,4 @@ flatter.pom
 *.rar
 build.ps1
 /logs/
+/.vscode/settings.json
