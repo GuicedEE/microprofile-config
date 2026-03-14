@@ -7,7 +7,7 @@ import com.guicedee.client.services.lifecycle.IGuiceConfigurator;
  * Enables classpath, annotation, and member scanning required for
  * MicroProfile Config injection.
  */
-public class ScanConfig implements IGuiceConfigurator
+public class ScanConfig implements IGuiceConfigurator<ScanConfig>
 {
     /**
      * Adjusts the Guice configuration to allow field scanning and access.
