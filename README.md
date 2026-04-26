@@ -2,7 +2,7 @@
 
 [![Build](https://github.com/GuicedEE/microprofile-config/actions/workflows/build.yml/badge.svg)](https://github.com/GuicedEE/Guiced-MicroProfileConfig/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.guicedee.microprofile/config)](https://central.sonatype.com/artifact/com.guicedee.microprofile/config)
-[![Maven Snapshot](https://img.shields.io/nexus/s/com.guicedee.microprofile/config?server=https%3A%2F%2Foss.sonatype.org&label=Maven%20Snapshot)](https://oss.sonatype.org/content/repositories/snapshots/com/guicedee/microprofile/config/)
+[![Snapshot](https://img.shields.io/badge/Snapshot-2.0.0-SNAPSHOT-orange)](https://github.com/GuicedEE/Packages/packages/maven/com.guicedee.microprofile.config)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ![Java 25+](https://img.shields.io/badge/Java-25%2B-green)
@@ -87,23 +87,39 @@ The `MicroProfileConfigContext` initializes SmallRye Config automatically during
 
 ## 📐 Architecture
 
-```
-IGuiceContext.instance()
- └─ IGuiceConfigurator hooks
-     └─ ScanConfig                          (enables field, annotation, classpath scanning)
- └─ IGuicePreStartup hooks
-     └─ MicroProfileConfigContext           (builds SmallRyeConfig on Vert.x worker thread)
-         ├─ addDefaultSources()             (env vars, system props, microprofile-config.properties)
-         ├─ addDiscoveredSources()           (ServiceLoader-discovered ConfigSource SPIs)
-         ├─ addDiscoveredConverters()        (ServiceLoader-discovered Converter<T> SPIs)
-         └─ addDiscoveredInterceptors()      (ConfigSourceInterceptor SPIs)
- └─ IGuiceModule hooks
-     └─ MicroProfileConfigBinder            (Guice AbstractModule)
-         ├─ bind SmallRyeConfig via SmallRyeConfigProvider (singleton)
-         ├─ scan @ConfigProperty fields via ClassGraph
-         └─ bind each field type: String, Boolean, Integer, Long, Double, Float, Optional<T>
- └─ InjectionPointProvider
-     └─ InjectionPointProvision             (registers @ConfigProperty as a Guice injection point)
+```mermaid
+flowchart TD
+    n1["IGuiceContext.instance()"]
+    n2["IGuiceConfigurator hooks"]
+    n1 --> n2
+    n3["ScanConfig<br/>enables field, annotation, classpath scanning"]
+    n2 --> n3
+    n4["IGuicePreStartup hooks"]
+    n1 --> n4
+    n5["MicroProfileConfigContext<br/>builds SmallRyeConfig on Vert.x worker thread"]
+    n4 --> n5
+    n6["addDefaultSources()<br/>env vars, system props, microprofile-config.properties"]
+    n5 --> n6
+    n7["addDiscoveredSources()<br/>ServiceLoader-discovered ConfigSource SPIs"]
+    n5 --> n7
+    n8["addDiscoveredConverters()<br/>ServiceLoader-discovered Converter<T> SPIs"]
+    n5 --> n8
+    n9["addDiscoveredInterceptors()<br/>ConfigSourceInterceptor SPIs"]
+    n5 --> n9
+    n10["IGuiceModule hooks"]
+    n1 --> n10
+    n11["MicroProfileConfigBinder<br/>Guice AbstractModule"]
+    n10 --> n11
+    n12["bind SmallRyeConfig via SmallRyeConfigProvider<br/>singleton"]
+    n11 --> n12
+    n13["scan @ConfigProperty fields via ClassGraph"]
+    n11 --> n13
+    n14["bind each field type: String, Boolean, Integer, Long, Double, Float, Optional<T>"]
+    n11 --> n14
+    n15["InjectionPointProvider"]
+    n1 --> n15
+    n16["InjectionPointProvision<br/>registers @ConfigProperty as a Guice injection point"]
+    n15 --> n16
 ```
 
 ## ⚙️ Configuration Sources and Resolution
@@ -237,12 +253,13 @@ All SPIs are discovered via `ServiceLoader`. Register implementations with JPMS 
 
 ## 🗺️ Module Graph
 
-```
-com.guicedee.microprofile.config
- ├── io.smallrye.config.core          (SmallRye Config — MicroProfile Config implementation)
- ├── com.guicedee.vertx               (Vert.x lifecycle — worker thread initialization)
- ├── com.guicedee.client              (GuicedEE client — SPI contracts, IGuiceContext)
- └── com.google.guice                 (Guice DI — injection bindings)
+```mermaid
+flowchart LR
+    com_guicedee_microprofile_config["com.guicedee.microprofile.config"]
+    com_guicedee_microprofile_config --> io_smallrye_config_core["io.smallrye.config.core<br/>SmallRye Config — MicroProfile Config implementation"]
+    com_guicedee_microprofile_config --> com_guicedee_vertx["com.guicedee.vertx<br/>Vert.x lifecycle — worker thread initialization"]
+    com_guicedee_microprofile_config --> com_guicedee_client["com.guicedee.client<br/>GuicedEE client — SPI contracts, IGuiceContext"]
+    com_guicedee_microprofile_config --> com_google_guice["com.google.guice<br/>Guice DI — injection bindings"]
 ```
 
 ## 🏗️ Key Classes
