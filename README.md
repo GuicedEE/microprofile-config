@@ -26,7 +26,7 @@ Built on [SmallRye Config](https://smallrye.io/smallrye-config/) · [MicroProfil
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.guicedee.microprofile:config:2.0.1-SNAPSHOT")
+implementation("com.guicedee.microprofile:config:2.0.1")
 ```
 </details>
 
