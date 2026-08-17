@@ -41,9 +41,59 @@ public class MicroProfileConfigContext implements IGuicePreStartup<MicroProfileC
                     .addDiscoveredSources()
                     .addDiscoveredConverters()
                     .addDiscoveredInterceptors();
-            config = configBuilder.build();
+            try
+            {
+                config = configBuilder.build();
+            }
+            catch (RuntimeException e)
+            {
+                throw enrich(e);
+            }
             return true;
         }));
+    }
+
+    /**
+     * SmallRye loads every {@code META-INF/microprofile-config.properties} on the class path with
+     * {@link java.util.Properties#load(java.io.InputStream)} but discards the URL when the parse
+     * fails, producing a bare {@code Malformed \\uxxxx encoding.} with no indication of the file at
+     * fault. This re-scans the same resources and appends the offending file, line and column to
+     * the failure so it can actually be diagnosed.
+     *
+     * @param cause the original configuration build failure
+     * @return the original exception when nothing could be pin-pointed, otherwise an enriched one
+     */
+    private static RuntimeException enrich(RuntimeException cause)
+    {
+        List<String> problems;
+        try
+        {
+            problems = ConfigPropertiesValidator.validateDefaultSources();
+        }
+        catch (RuntimeException scanFailure)
+        {
+            return cause;
+        }
+
+        if (problems.isEmpty())
+        {
+            return cause;
+        }
+
+        StringBuilder message = new StringBuilder(String.valueOf(cause.getMessage()))
+                .append(System.lineSeparator())
+                .append("Invalid ")
+                .append(ConfigPropertiesValidator.DEFAULT_RESOURCE)
+                .append(" file(s) detected on the class path:");
+        for (String problem : problems)
+        {
+            message.append(System.lineSeparator())
+                   .append("  - ")
+                   .append(problem);
+        }
+
+        log.error(message);
+        return new IllegalStateException(message.toString(), cause);
     }
 
 }

@@ -222,15 +222,15 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
         super.configure();
     }
 
-    @EqualsAndHashCode(of = {"clazz",
-            "name"})
-    @AllArgsConstructor
     /**
      * Key for tracking whether a type/name pair has already been bound.
      */
+    @EqualsAndHashCode(of = {"clazz",
+            "name"})
+    @AllArgsConstructor
     static final class ClassKeyPair
     {
-        private final Class clazz;
+        private final Class<?> clazz;
         private final String name;
     }
 }
