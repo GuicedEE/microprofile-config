@@ -1,5 +1,7 @@
 package com.guicedee.microprofile.config.implementations;
 
+import com.guicedee.client.utils.ClassLoading;
+
 import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Key;
@@ -52,7 +54,7 @@ public class MicroProfileConfigBinder extends AbstractModule implements IGuiceMo
             {
                 if (fieldInfo.hasAnnotation(ConfigProperty.class))
                 {
-                    Class<?> aClass = classesWithConfigProperty.loadClass();
+                    Class<?> aClass = ClassLoading.loadClass(classesWithConfigProperty);
                     try
                     {
                         Field declaredField = aClass.getDeclaredField(fieldInfo.getName());
